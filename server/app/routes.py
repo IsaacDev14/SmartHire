@@ -62,7 +62,7 @@ def send_verification_email(user):
     If you didn't create an account, you can ignore this email.
     
     Best regards,
-    SmartRecruiter Team
+    SmartHireTeam
     """
     
     send_email(user.email, subject, body)
@@ -86,7 +86,7 @@ def send_password_reset_email(user):
     If you didn't request a password reset, you can ignore this email.
 
     Best regards,
-    SmartRecruiter Team
+    SmartHireTeam
     """
     
     send_email(user.email, subject, body)
@@ -110,11 +110,11 @@ def signup():
     if existing_user:
         return jsonify({'error': 'User already exists'}), 409
     try:
-        # Create new user
+        # Create new user - SET EMAIL VERIFIED TO TRUE
         user = User(
             email=data['email'],
             role=data['role'],
-            email_verified=False
+            email_verified=True  # Changed from False to True
         )
         user.set_password(data['password'])
         db.session.add(user)
@@ -142,11 +142,18 @@ def signup():
             db.session.add(profile)
         db.session.commit()
         
-        # Send verification email
-        if send_verification_email(user):
-            return jsonify({'message': 'Account created successfully. Please check your email to verify your account.'}), 201
-        else:
-            return jsonify({'message': 'Account created successfully, but verification email could not be sent. Please contact support.'}), 201
+        # REMOVED: Send verification email
+        # Automatically log the user in after signup
+        session['user_id'] = user.id
+        session['role'] = user.role
+        
+        return jsonify({
+            'message': 'Account created successfully',
+            'user_id': user.id,
+            'role': user.role,
+            'redirect': '/onboarding' if user.role == 'interviewee' else '/recruiter/dashboard'
+        }), 201
+        
     except IntegrityError as e:
         db.session.rollback()
         return jsonify({'error': 'A database integrity error occurred. Please check your input and try again.'}), 400
@@ -164,9 +171,10 @@ def login():
     if not user.check_password(data['password']):
         return jsonify({'error': 'Incorrect password. Please try again.'}), 401
     
+    # REMOVE OR COMMENT OUT THIS EMAIL VERIFICATION CHECK
     # Check if account is verified
-    if not user.email_verified:
-        return jsonify({'error': 'Please verify your email address before logging in. Check your email for a verification link.'}), 401
+    # if not user.email_verified:
+    #     return jsonify({'error': 'Please verify your email address before logging in. Check your email for a verification link.'}), 401
     
     # Set session data
     session['user_id'] = user.id
@@ -195,27 +203,27 @@ def login():
     
     return jsonify(response_data), 200
 
-@auth_bp.route('/verify-email', methods=['POST'])
-def verify_email():
-    data = request.get_json()
-    token = data.get('token')
+# @auth_bp.route('/verify-email', methods=['POST'])
+# def verify_email():
+#     data = request.get_json()
+#     token = data.get('token')
     
-    if not token:
-        return jsonify({'error': 'Verification token is required'}), 400
+#     if not token:
+#         return jsonify({'error': 'Verification token is required'}), 400
     
-    user = User.query.filter_by(email_verification_token=token).first()
-    if not user:
-        return jsonify({'error': 'Invalid or expired verification token'}), 400
+#     user = User.query.filter_by(email_verification_token=token).first()
+#     if not user:
+#         return jsonify({'error': 'Invalid or expired verification token'}), 400
     
-    # Check if user is already verified
-    if user.email_verified:
-        return jsonify({'error': 'Email is already verified. You can log in to your account.'}), 400
+#     # Check if user is already verified
+#     if user.email_verified:
+#         return jsonify({'error': 'Email is already verified. You can log in to your account.'}), 400
     
-    user.email_verified = True
-    user.email_verification_token = None
-    db.session.commit()
+#     user.email_verified = True
+#     user.email_verification_token = None
+#     db.session.commit()
     
-    return jsonify({'message': 'Email verified successfully. You can now log in.'}), 200
+#     return jsonify({'message': 'Email verified successfully. You can now log in.'}), 200
 
 @auth_bp.route('/resend-verification', methods=['POST'])
 def resend_verification():
@@ -3508,7 +3516,7 @@ Interview Details:
                 body += f"Notes: {data['notes']}\n\n"
             
             body += f"""
-Please log in to your SmartRecruiter dashboard to view full interview details and prepare for your interview.
+Please log in to your SmartHiredashboard to view full interview details and prepare for your interview.
 
 Best regards,
 {recruiter_name}

@@ -1,10 +1,10 @@
-# SmartRecruiter System Flowchart
+# SmartHireSystem Flowchart
 
 ## System Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           SmartRecruiter Platform                          │
+│                           SmartHirePlatform                          │
 │                                                                             │
 │  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐        │
 │  │   Frontend      │    │    Backend      │    │   Database      │        │
@@ -420,4 +420,4 @@
 └─────────────┘     └─────────────┘     └─────────────┘
 ```
 
-This comprehensive system flowchart provides a complete overview of the SmartRecruiter platform's architecture, user flows, and system interactions. Each flow demonstrates the relationship between different components and how data moves through the system. 
+This comprehensive system flowchart provides a complete overview of the SmartHireplatform's architecture, user flows, and system interactions. Each flow demonstrates the relationship between different components and how data moves through the system. 

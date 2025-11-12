@@ -64,7 +64,7 @@ export default function DashboardSidebar() {
         {!collapsed && (
           <div className="flex items-center space-x-2">
             <Code2 className="h-6 w-6 text-sidebar-primary" />
-            <span className="font-bold text-sidebar-foreground">SmartRecruiter</span>
+            <span className="font-bold text-sidebar-foreground">SmartHire</span>
           </div>
         )}
         <Button

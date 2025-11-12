@@ -89,7 +89,7 @@ export default function Login() {
           ...userData, 
           onboarding: onboardingStatus 
         })
-        // localStorage.setItem("smartrecruiter_user", JSON.stringify(userData))
+        // localStorage.setItem("SmartHire_user", JSON.stringify(userData))
         // toast({ title: "Success", description: "Login successful!", variant: "default" })
         if (data.redirect) {
           navigate(data.redirect)
@@ -160,7 +160,7 @@ export default function Login() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Code2 className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-foreground">SmartRecruiter</span>
+              <span className="text-2xl font-bold text-foreground">SmartHire</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
             <p className="text-muted-foreground">Sign in to your account to continue</p>

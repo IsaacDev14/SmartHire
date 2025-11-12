@@ -1,4 +1,4 @@
-# SmartRecruiter
+# SmartHire
 
 A comprehensive technical assessment platform that automates the in-person technical interview process, similar to Coderbyte. Built with modern web technologies and designed for seamless collaboration between recruiters and interviewees.
 
@@ -18,7 +18,7 @@ A comprehensive technical assessment platform that automates the in-person techn
 
 ## Overview
 
-SmartRecruiter is a full-stack web application that streamlines the technical hiring process by providing:
+SmartHireis a full-stack web application that streamlines the technical hiring process by providing:
 
 - **Automated Technical Assessments**: Create and manage coding challenges, multiple-choice questions, and subjective assessments
 - **Real-time Evaluation**: Instant feedback and scoring for coding submissions
@@ -125,7 +125,7 @@ SmartRecruiter is a full-stack web application that streamlines the technical hi
 
 ### Project Structure
 ```
-SmartRecruiter/
+SmartHire/
 ├── client/                 # React frontend
 │   ├── src/
 │   │   ├── components/    # Reusable UI components
@@ -163,8 +163,8 @@ SmartRecruiter/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/awuorochelle75/SmartRecruiter.git
-   cd SmartRecruiter
+   git clone https://github.com/awuorochelle75/SmartHire.git
+   cd SmartHire
    ```
 
 2. **Backend Setup**
@@ -178,7 +178,7 @@ SmartRecruiter/
 3. **Database Setup**
    ```bash
    # Create PostgreSQL database
-   createdb smartrecruiter
+   createdb SmartHire
    
    # Set up environment variables
    cp env.example .env
@@ -203,7 +203,7 @@ SmartRecruiter/
    ```bash
    # Backend (.env in server/)
    SECRET_KEY=your-secret-key
-   DATABASE_URL=postgresql://user:password@localhost:5432/smartrecruiter
+   DATABASE_URL=postgresql://user:password@localhost:5432/SmartHire
    GMAIL_USER=your-email@gmail.com
    GMAIL_APP_PASSWORD=your-app-password
    FRONTEND_URL=http://localhost:5173
@@ -358,6 +358,6 @@ This project is developed as part of a team assignment. All rights reserved.
 
 ---
 
-**SmartRecruiter** - Revolutionizing technical hiring through intelligent assessment automation.
+**SmartHire** - Revolutionizing technical hiring through intelligent assessment automation.
 
 *Built with ❤️ by Rochelle, David, Dorothy, and Isaac*

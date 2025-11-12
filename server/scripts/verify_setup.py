@@ -29,12 +29,12 @@ def verify_setup():
         return False
     
     # Check database tables
-    tables_output = run_command("PGPASSWORD=smartpassword psql -U smartuser -d smartrecruiter -h localhost -c \"\\dt\"", "Checking database tables")
+    tables_output = run_command("PGPASSWORD=smartpassword psql -U smartuser -d SmartHire-h localhost -c \"\\dt\"", "Checking database tables")
     if not tables_output:
         return False
     
     # Check if session table exists
-    session_check = run_command("PGPASSWORD=smartpassword psql -U smartuser -d smartrecruiter -h localhost -c \"SELECT COUNT(*) FROM session;\"", "Checking session table")
+    session_check = run_command("PGPASSWORD=smartpassword psql -U smartuser -d SmartHire-h localhost -c \"SELECT COUNT(*) FROM session;\"", "Checking session table")
     if not session_check:
         return False
     
@@ -45,7 +45,7 @@ def verify_setup():
         temp_file = f.name
     
     try:
-        user_check = run_command(f"PGPASSWORD=smartpassword psql -U smartuser -d smartrecruiter -h localhost -f {temp_file}", "Checking user table")
+        user_check = run_command(f"PGPASSWORD=smartpassword psql -U smartuser -d SmartHire-h localhost -f {temp_file}", "Checking user table")
         if not user_check:
             return False
     finally:

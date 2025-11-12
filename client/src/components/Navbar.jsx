@@ -15,7 +15,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <Code2 className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-foreground">SmartRecruiter</span>
+            <span className="text-xl font-bold text-foreground">SmartHire</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">

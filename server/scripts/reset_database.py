@@ -7,7 +7,7 @@ import subprocess
 import sys
 
 # Database configuration
-DB_NAME = "smartrecruiter"
+DB_NAME = "SmartHire"
 DB_USER = "smartuser"
 DB_PASSWORD = "smartpassword"
 DB_HOST = "localhost"

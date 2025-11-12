@@ -114,7 +114,7 @@ export default function ResetPassword() {
             <div className="text-center mb-8">
               <div className="flex items-center justify-center space-x-2 mb-4">
                 <Code2 className="h-8 w-8 text-primary" />
-                <span className="text-2xl font-bold text-foreground">SmartRecruiter</span>
+                <span className="text-2xl font-bold text-foreground">SmartHire</span>
               </div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Invalid Reset Link</h1>
               <p className="text-muted-foreground">The password reset link is invalid or has expired</p>
@@ -162,7 +162,7 @@ export default function ResetPassword() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Code2 className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold text-foreground">SmartRecruiter</span>
+              <span className="text-2xl font-bold text-foreground">SmartHire</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">Reset Password</h1>
             <p className="text-muted-foreground">Enter your new password below</p>

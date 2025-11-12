@@ -40,7 +40,7 @@ export default function SendInvites() {
   const [selectedAssessment, setSelectedAssessment] = useState("");
   const [individualEmail, setIndividualEmail] = useState("");
   const [bulkEmails, setBulkEmails] = useState("");
-  const [message, setMessage] = useState("You've been invited to take an assessment on SmartRecruiter!");
+  const [message, setMessage] = useState("You've been invited to take an assessment on SmartHire!");
   const [invitedCount, setInvitedCount] = useState(0);
   const [errors, setErrors] = useState({});
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -122,7 +122,7 @@ export default function SendInvites() {
     const assessmentTitle = getAssessmentTitle(selectedAssessment);
     setSendingIndividual(true);
     try {
-      await sendInviteRequest(valid[0], assessmentTitle, message, `Invitation to ${assessmentTitle} on SmartRecruiter`);
+      await sendInviteRequest(valid[0], assessmentTitle, message, `Invitation to ${assessmentTitle} on SmartHire`);
       setInvitedCount((prev) => prev + 1);
       setConfirmMessage(`Invitation sent to ${valid[0]} for ${assessmentTitle}!`);
       setConfirmOpen(true);
@@ -153,7 +153,7 @@ export default function SendInvites() {
     const assessmentTitle = getAssessmentTitle(selectedAssessment);
     setSendingBulk(true);
     try {
-      await sendInviteRequest(valid, assessmentTitle, message, `Invitation to ${assessmentTitle} on SmartRecruiter`);
+      await sendInviteRequest(valid, assessmentTitle, message, `Invitation to ${assessmentTitle} on SmartHire`);
       setInvitedCount((prev) => prev + valid.length);
       setConfirmMessage(`Invitations sent to ${valid.length} candidates for ${assessmentTitle}!`);
       setConfirmOpen(true);

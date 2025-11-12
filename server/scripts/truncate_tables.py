@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Truncate all tables in SmartRecruiter database (for development only)
+Truncate all tables in SmartHiredatabase (for development only)
 """
 import os
 import sys
@@ -10,13 +10,13 @@ from typing import List, Dict, Any
 # Database configuration
 DB_CONFIG = {
     'development': {
-        'db_name': 'smartrecruiter',
+        'db_name': 'SmartHire',
         'db_user': 'smartuser',
         'db_password': 'smartpassword',
         'db_host': 'localhost'
     },
     'testing': {
-        'db_name': 'smartrecruiter_test',
+        'db_name': 'SmartHire_test',
         'db_user': 'smartuser',
         'db_password': 'smartpassword',
         'db_host': 'localhost'

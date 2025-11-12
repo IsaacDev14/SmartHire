@@ -14,7 +14,7 @@ def setup_database():
     max_retries = 5
     retry_delay = 3
     
-    print("=== SmartRecruiter Database Setup ===")
+    print("=== SmartHireDatabase Setup ===")
     print(f"Environment DATABASE_URL: {os.environ.get('DATABASE_URL', 'NOT SET')}")
     print(f"App Database URL: {app.config.get('SQLALCHEMY_DATABASE_URI', 'NOT SET')}")
     
@@ -95,7 +95,7 @@ def setup_database():
                 return False
 
 # Run database setup on startup
-print("=== SmartRecruiter WSGI Startup ===")
+print("=== SmartHireWSGI Startup ===")
 success = setup_database()
 if success:
     print("=== Database setup completed successfully ===")

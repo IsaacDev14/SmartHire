@@ -1,5 +1,5 @@
 """
-CodeWars API Integration for SmartRecruiter
+CodeWars API Integration for SmartHire
 
 This module provides integration with CodeWars API to import coding challenges
 into our assessment system without affecting existing functionality.
@@ -19,7 +19,7 @@ class CodeWarsAPI:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'SmartRecruiter/1.0'
+            'User-Agent': 'SmartHire/1.0'
         })
     
     def get_challenge(self, challenge_id: str) -> Optional[Dict]:

@@ -29,9 +29,9 @@ import RecruiterResults from "./pages/recruiter/Results"
 import Interviews from "./pages/recruiter/Interviews"
 import Messages from "./pages/recruiter/Messages"
 import Settings from "./pages/recruiter/Settings"
-import RecruiterProfile from "./pages/recruiter/Profile" // New: Recruiter Profile
-import RecruiterFeedback from "./pages/recruiter/Feedback" // New: Recruiter Feedback
-import RecruiterNotifications from "./pages/recruiter/Notifications" // New: Recruiter Notifications
+import RecruiterProfile from "./pages/recruiter/Profile"
+import RecruiterFeedback from "./pages/recruiter/Feedback"
+import RecruiterNotifications from "./pages/recruiter/Notifications"
 import AssessmentDetails from './pages/recruiter/AssessmentDetails';
 import Results from './pages/recruiter/Results';
 import ResultsAnalytics from './pages/recruiter/ResultsAnalytics';
@@ -56,7 +56,6 @@ import IntervieweeSettings from "./pages/interviewee/Settings"
 import AssessmentPage from "./pages/interviewee/AssessmentPage"
 import IntervieweeFeedback from "./pages/interviewee/Feedback"
 import IntervieweeNotifications from "./pages/interviewee/Notifications"
-
 
 // Protected Route Component
 function ProtectedRoute({ children, requiredRole }) {
@@ -93,8 +92,6 @@ function AppRoutes() {
       </div>
     )
   }
-
-
 
   return (
     <Routes>
@@ -171,6 +168,8 @@ function AppRoutes() {
       />
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/about" element={<About />} />
+      
+      {/* Recruiter Routes */}
       <Route
         path="/recruiter/dashboard"
         element={
@@ -221,11 +220,19 @@ function AppRoutes() {
       />
       <Route
         path="/recruiter/assessments/:id/results"
-        element={<Results />}
+        element={
+          <ProtectedRoute requiredRole="recruiter">
+            <Results />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/recruiter/assessments/:id/send-invites"
-        element={<SendInvites />}
+        element={
+          <ProtectedRoute requiredRole="recruiter">
+            <SendInvites />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/recruiter/send-invites"
@@ -355,6 +362,8 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      
+      {/* Interviewee Routes */}
       <Route
         path="/interviewee/dashboard"
         element={
@@ -451,8 +460,24 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      
+      {/* Catch-all route */}
       <Route path="*" element={<NotFound />} />
     </Routes>
+  )
+}
+
+// Create a custom Router component with future flags
+function CustomBrowserRouter({ children }) {
+  return (
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
+      {children}
+    </Router>
   )
 }
 
@@ -462,14 +487,12 @@ export default function App() {
       <AuthProvider>
         <NotificationProvider>
           <ToastProvider>
-            <Router>
+            <CustomBrowserRouter>
               <AppRoutes />
-            </Router>
+            </CustomBrowserRouter>
           </ToastProvider>
         </NotificationProvider>
       </AuthProvider>
     </ThemeProvider>
   )
 }
-
-

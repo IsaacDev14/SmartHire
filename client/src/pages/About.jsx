@@ -49,7 +49,7 @@ const testimonialsData = [
     title: "HR Director",
     company: "Safaricom PLC",
     quote:
-      "SmartRecruiter reduced our hiring time by 60% while improving candidate quality. The platform's AI assessments are unmatched in our market.",
+      "SmartHirereduced our hiring time by 60% while improving candidate quality. The platform's AI assessments are unmatched in our market.",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop",
     rating: 5,
   },
@@ -59,7 +59,7 @@ const testimonialsData = [
     title: "Tech Lead",
     company: "Cellulant",
     quote:
-      "The technical assessments accurately reflect real-world skills. We've seen a 40% reduction in early attrition since using SmartRecruiter.",
+      "The technical assessments accurately reflect real-world skills. We've seen a 40% reduction in early attrition since using SmartHire.",
     avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop",
     rating: 5,
   },

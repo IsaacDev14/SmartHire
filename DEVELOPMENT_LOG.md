@@ -1,4 +1,4 @@
-# SmartRecruiter Development Log
+# SmartHireDevelopment Log
 
 ## 1. Initial Setup
 - Created React frontend with Vite
@@ -105,11 +105,11 @@ During development, we needed a way to clear the database and start fresh withou
 Created `server/scripts/clear_db.sh`:
 ```bash
 #!/bin/bash
-# Clear all data from SmartRecruiter database tables and reset identity sequences (for development only)
+# Clear all data from SmartHiredatabase tables and reset identity sequences (for development only)
 
 set -e
 
-DB_NAME="smartrecruiter"
+DB_NAME="SmartHire"
 DB_USER="postgres"
 
 psql -U $DB_USER -d $DB_NAME <<EOF

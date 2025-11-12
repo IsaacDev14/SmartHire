@@ -10,21 +10,21 @@ from typing import Dict, Any
 # Environment configurations
 ENVIRONMENTS = {
     'development': {
-        'db_name': 'smartrecruiter',
+        'db_name': 'SmartHire',
         'db_user': 'smartuser',
         'db_password': 'smartpassword',
         'db_host': 'localhost',
         'flask_env': 'development'
     },
     'production': {
-        'db_name': os.environ.get('DATABASE_NAME', 'smartrecruiter'),
+        'db_name': os.environ.get('DATABASE_NAME', 'SmartHire'),
         'db_user': os.environ.get('DATABASE_USER', 'smartuser'),
         'db_password': os.environ.get('DATABASE_PASSWORD', 'smartpassword'),
         'db_host': os.environ.get('DATABASE_HOST', 'localhost'),
         'flask_env': 'production'
     },
     'testing': {
-        'db_name': 'smartrecruiter_test',
+        'db_name': 'SmartHire_test',
         'db_user': 'smartuser',
         'db_password': 'smartpassword',
         'db_host': 'localhost',

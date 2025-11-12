@@ -96,7 +96,7 @@ const HeroSection = () => {
           </h1>
           
           <p className="text-lg sm:text-xl text-white mb-8">
-            SmartRecruiter automates technical interviews with intelligent assessments,
+            SmartHireautomates technical interviews with intelligent assessments,
             helping you identify top talent faster and more accurately.
           </p>
           
@@ -170,7 +170,7 @@ export default function Home() {
             className="flex flex-col items-center justify-center text-center mb-16"
           >
             <motion.h1 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-              Why Choose SmartRecruiter?
+              Why Choose SmartHire?
             </motion.h1>
             <motion.p variants={itemVariants} className="text-lg sm:text-xl text-muted-foreground max-w-3xl">
               Our platform combines cutting-edge technology with intuitive design to
@@ -230,7 +230,7 @@ export default function Home() {
               
               <div className="relative bg-card/50 border border-border/50 p-8 sm:p-10 rounded-xl shadow-sm backdrop-blur-sm">
                 <blockquote className="text-lg italic mb-6 text-muted-foreground">
-                  "SmartRecruiter has reduced our technical hiring time by 60% while improving candidate quality. The AI assessments are remarkably accurate."
+                  "SmartHirehas reduced our technical hiring time by 60% while improving candidate quality. The AI assessments are remarkably accurate."
                 </blockquote>
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 overflow-hidden flex items-center justify-center">
@@ -260,7 +260,7 @@ export default function Home() {
             Ready to Transform Your Hiring?
           </motion.h2>
           <motion.p variants={itemVariants} className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Join thousands of companies hiring smarter with SmartRecruiter.
+            Join thousands of companies hiring smarter with SmartHire.
           </motion.p>
           <motion.div variants={itemVariants}>
             <Button 

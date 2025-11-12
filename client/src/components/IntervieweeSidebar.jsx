@@ -80,7 +80,7 @@ export default function IntervieweeSidebar() {
           <div className="flex items-center space-x-2">
             <Code2 className="h-6 w-6 text-sidebar-primary" />
             <div>
-              <span className="font-bold text-sidebar-foreground">SmartRecruiter</span>
+              <span className="font-bold text-sidebar-foreground">SmartHire</span>
               <p className="text-xs text-sidebar-foreground/70">Candidate Portal</p>
             </div>
           </div>

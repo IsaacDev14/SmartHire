@@ -1,6 +1,6 @@
 Single-database configuration for Flask.
 
-# Migration Best Practices (SmartRecruiter)
+# Migration Best Practices (SmartHire)
 
 - **Always use `flask db` commands** for migrations:
   - `flask db migrate -m "Your message"` to create a migration
@@ -135,16 +135,16 @@ sudo -u postgres psql
 
 Create the database and user (used in this project):
 ```sql
-CREATE DATABASE smartrecruiter;
+CREATE DATABASE SmartHire;
 CREATE USER smartuser WITH PASSWORD 'smartpassword';
-GRANT ALL PRIVILEGES ON DATABASE smartrecruiter TO smartuser;
+GRANT ALL PRIVILEGES ON DATABASE SmartHireTO smartuser;
 ```
 
 ## 2. Connect to the Database
 
 From your shell:
 ```sh
-psql -U smartuser -d smartrecruiter -h localhost
+psql -U smartuser -d SmartHire-h localhost
 ```
 
 ## 3. Check Tables
@@ -178,7 +178,7 @@ UPDATE alembic_version SET version_num = '<revision_id>';
 ---
 
 **Database credentials used in this project:**
-- DB: `smartrecruiter`
+- DB: `SmartHire`
 - User: `smartuser`
 - Password: `smartpassword`
 

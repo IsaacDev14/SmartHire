@@ -1,3 +1,4 @@
+# app/__init__.py
 from flask import Flask, request, session, send_from_directory
 from .models import db
 from flask_migrate import Migrate
@@ -10,6 +11,21 @@ import uuid
 from datetime import datetime, timedelta
 from flask.sessions import SessionInterface, SessionMixin
 from werkzeug.datastructures import CallbackDict
+
+def create_app(config=None):
+    app = Flask(__name__)
+    app.secret_key = 'dev-secret-key'  # Ensure static secret key
+    
+    # Configure session for development
+    if os.environ.get('FLASK_ENV') == 'development':
+        app.config['SESSION_COOKIE_SECURE'] = False  # Allow HTTP in development
+        app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # More permissive in development
+    else:
+        app.config['SESSION_COOKIE_SECURE'] = True
+        app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+    
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_DOMAIN'] = None
 
 class DatabaseSession(CallbackDict, SessionMixin):
     def __init__(self, initial=None, sid=None, permanent=False):
@@ -34,41 +50,50 @@ class DatabaseSessionInterface(SessionInterface):
 
     def open_session(self, app, request):
         sid = request.cookies.get(self.cookie_name)
+        
+        # Debug logging
+        app.logger.debug(f"Looking for session with SID: {sid}")
+        
         if not sid:
             sid = self._generate_sid()
+            app.logger.debug(f"No SID found, generating new: {sid}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
-    
+
         # Find session in database
         from .models import db
         session_record = db.session.execute(
             db.text("SELECT * FROM session WHERE session_id = :sid"),
             {"sid": sid}
         ).fetchone()
-    
+
         if not session_record:
+            app.logger.debug(f"No session found in DB for SID: {sid}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
-    
+
         # Check if session has expired
-        # Handle both string and datetime types for expiry
         expiry = session_record.expiry
         if isinstance(expiry, str):
             try:
                 expiry = datetime.fromisoformat(expiry.replace('Z', '+00:00'))
             except ValueError:
-                # If parsing fails, treat as expired
+                app.logger.debug(f"Invalid expiry format: {expiry}")
                 return DatabaseSession(sid=sid, permanent=self.permanent)
         
         if expiry < datetime.utcnow():
+            app.logger.debug(f"Session expired for SID: {sid}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
-    
+
         # Load session data
         try:
             session_data = json.loads(session_record.data)
+            app.logger.debug(f"Session data loaded: {session_data}")
             session = DatabaseSession(session_data, sid=sid, permanent=self.permanent)
             session.modified = False
             return session
-        except (json.JSONDecodeError, KeyError):
+        except (json.JSONDecodeError, KeyError) as e:
+            app.logger.debug(f"Error loading session data: {e}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
+
 
     def save_session(self, app, session, response):
         domain = self.cookie_domain
@@ -213,7 +238,7 @@ def create_app(config=None):
             logging.getLogger('werkzeug').setLevel(logging.INFO)
     
     # Email configuration - use environment variables for production
-    app.config['GMAIL_USER'] = os.environ.get('GMAIL_USER', 'davidwize189@gmail.com')
+    app.config['GMAIL_USER'] = os.environ.get('GMAIL_USER', 'mwitiisaac14@gmail.com')
     app.config['GMAIL_APP_PASSWORD'] = os.environ.get('GMAIL_APP_PASSWORD', 'gqslabpcfzrzgvke')
     app.config['GMAIL_SMTP_HOST'] = 'smtp.gmail.com'
     app.config['GMAIL_SMTP_PORT'] = 465

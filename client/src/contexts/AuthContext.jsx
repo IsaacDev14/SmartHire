@@ -1,3 +1,4 @@
+// src/contexts/AuthContext.jsx
 "use client"
 
 import { createContext, useContext, useState, useEffect } from "react"
@@ -25,15 +26,15 @@ export function AuthProvider({ children }) {
         if (response.ok) {
           const userData = await response.json()
           setUser(userData)
-          localStorage.setItem("smartrecruiter_user", JSON.stringify(userData))
+          localStorage.setItem("SmartHire_user", JSON.stringify(userData))
         } else {
           setUser(null)
-          localStorage.removeItem("smartrecruiter_user")
+          localStorage.removeItem("SmartHire_user")
         }
       } catch (error) {
         console.error("Error checking session:", error)
         setUser(null)
-        localStorage.removeItem("smartrecruiter_user")
+        localStorage.removeItem("SmartHire_user")
       } finally {
         setLoading(false)
     }
@@ -44,7 +45,7 @@ export function AuthProvider({ children }) {
 
   const login = (userData) => {
     setUser(userData)
-    localStorage.setItem("smartrecruiter_user", JSON.stringify(userData))
+    localStorage.setItem("SmartHire_user", JSON.stringify(userData))
   }
 
   const logout = async () => {
@@ -57,7 +58,7 @@ export function AuthProvider({ children }) {
       console.error("Error during logout:", error)
     } finally {
     setUser(null)
-    localStorage.removeItem("smartrecruiter_user")
+    localStorage.removeItem("SmartHire_user")
     }
   }
 

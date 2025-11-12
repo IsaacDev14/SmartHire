@@ -1,6 +1,6 @@
 # Database and Migration Scripts
 
-This folder contains scripts for managing the SmartRecruiter database and migrations.
+This folder contains scripts for managing the SmartHiredatabase and migrations.
 
 ## Available Scripts
 
@@ -79,7 +79,7 @@ export DATABASE_HOST="your_production_host"
 ## Database Credentials
 
 - **Development/Testing**: 
-  - Database: `smartrecruiter`
+  - Database: `SmartHire`
   - User: `smartuser`
   - Password: `smartpassword`
   - Host: `localhost`
