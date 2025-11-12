@@ -51,7 +51,6 @@ class DatabaseSessionInterface(SessionInterface):
     def open_session(self, app, request):
         sid = request.cookies.get(self.cookie_name)
         
-        # Debug logging
         app.logger.debug(f"Looking for session with SID: {sid}")
         
         if not sid:
@@ -59,7 +58,6 @@ class DatabaseSessionInterface(SessionInterface):
             app.logger.debug(f"No SID found, generating new: {sid}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
 
-        # Find session in database
         from .models import db
         session_record = db.session.execute(
             db.text("SELECT * FROM session WHERE session_id = :sid"),
@@ -70,7 +68,6 @@ class DatabaseSessionInterface(SessionInterface):
             app.logger.debug(f"No session found in DB for SID: {sid}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
 
-        # Check if session has expired
         expiry = session_record.expiry
         if isinstance(expiry, str):
             try:
@@ -83,7 +80,6 @@ class DatabaseSessionInterface(SessionInterface):
             app.logger.debug(f"Session expired for SID: {sid}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
 
-        # Load session data
         try:
             session_data = json.loads(session_record.data)
             app.logger.debug(f"Session data loaded: {session_data}")
@@ -94,23 +90,19 @@ class DatabaseSessionInterface(SessionInterface):
             app.logger.debug(f"Error loading session data: {e}")
             return DatabaseSession(sid=sid, permanent=self.permanent)
 
-
     def save_session(self, app, session, response):
         domain = self.cookie_domain
         if not self.should_set_cookie(app, session):
             return
         
-        # Calculate expiry time
         if session.permanent:
             expiry = datetime.utcnow() + self.max_age
         else:
             expiry = datetime.utcnow() + timedelta(days=1)
         
-        # Save session to database
         session_data = json.dumps(dict(session))
         
         from .models import db
-        # Check if session already exists
         existing = db.session.execute(
             db.text("SELECT id FROM session WHERE session_id = :sid"),
             {"sid": session.sid}
@@ -129,7 +121,6 @@ class DatabaseSessionInterface(SessionInterface):
         
         db.session.commit()
         
-        # Set cookie
         response.set_cookie(
             self.cookie_name,
             session.sid,
@@ -147,22 +138,19 @@ class DatabaseSessionInterface(SessionInterface):
 
 def create_app(config=None):
     app = Flask(__name__)
-    app.secret_key = 'dev-secret-key'  # Ensure static secret key
+    app.secret_key = 'dev-secret-key'
     
-    # Configure session for cross-origin requests
     app.config['SESSION_COOKIE_SECURE'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'None'
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_DOMAIN'] = None
     
-    # CORS configuration - use environment-aware origins
-    allowed_origins = app.config.get('CORS_ORIGINS', [
-        "http://localhost:5173", 
+    allowed_origins = [
+        "http://localhost:5173",
         "http://127.0.0.1:5173",
         "https://smart-hire-beta.vercel.app",
         "https://smart-hire-beta.vercel.app/"
-    ])
-    
+    ]
     
     CORS(
         app,
@@ -171,13 +159,11 @@ def create_app(config=None):
         allow_headers=["Content-Type", "Authorization", "X-Requested-With", "Accept"],
         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
         expose_headers=["Content-Type", "Authorization"],
-        max_age=86400  # Cache preflight requests for 24 hours
+        max_age=86400
     )
     
-    # Additional CORS headers for better compatibility
     @app.after_request
     def after_request(response):
-        # Only add CORS headers if they haven't been set by the CORS extension
         if 'Access-Control-Allow-Origin' not in response.headers:
             origin = request.headers.get('Origin')
             if origin in allowed_origins:
@@ -188,7 +174,6 @@ def create_app(config=None):
                 response.headers.add('Access-Control-Max-Age', '86400')
         return response
     
-    # Handle OPTIONS requests for preflight
     @app.route('/', defaults={'path': ''}, methods=['OPTIONS'])
     @app.route('/<path:path>', methods=['OPTIONS'])
     def handle_options(path):
@@ -202,7 +187,6 @@ def create_app(config=None):
             response.headers.add('Access-Control-Max-Age', '86400')
         return response
     
-    # Use provided config or determine from environment
     if config:
         app.config.from_object(config)
     else:
@@ -215,16 +199,13 @@ def create_app(config=None):
     db.init_app(app)
     Migrate(app, db)
     
-    # Set up custom session interface
     app.session_interface = DatabaseSessionInterface(app)
     
     logging.basicConfig(level=logging.DEBUG)
-    # Remove or comment out lines like:
-    # DEBUG:root:Request: ... session: ...
-    # But keep error logging and other non-session, non-login logs.
+    
     from .routes import auth_bp
     app.register_blueprint(auth_bp)
-    # Serve avatars
+    
     @app.route('/uploads/avatars/<filename>')
     def uploaded_avatar(filename):
         uploads_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'uploads', 'avatars')
@@ -237,18 +218,13 @@ def create_app(config=None):
         else:
             logging.getLogger('werkzeug').setLevel(logging.INFO)
     
-    # Email configuration - use environment variables for production
-    app.config['GMAIL_USER'] = os.environ.get('GMAIL_USER', 'mwitiisaac14@gmail.com')
-    app.config['GMAIL_APP_PASSWORD'] = os.environ.get('GMAIL_APP_PASSWORD', 'gqslabpcfzrzgvke')
+    # ✅ Hardcoded Gmail credentials
+    app.config['GMAIL_USER'] = 'demo@gmail.com'
+    app.config['GMAIL_APP_PASSWORD'] = 'gqslabpcfzrzgvke'
     app.config['GMAIL_SMTP_HOST'] = 'smtp.gmail.com'
     app.config['GMAIL_SMTP_PORT'] = 465
     
-    # Frontend URL - use environment variable for production
-    if os.environ.get('FLASK_ENV') == 'production':
-        app.config['FRONTEND_URL'] = os.environ.get('FRONTEND_URL', 'https://smart-hire-beta.vercel.app')
-    else:
-        app.config['FRONTEND_URL'] = os.environ.get('FRONTEND_URL', 'http://localhost:5173')
+    # ✅ Hardcoded frontend URL
+    app.config['FRONTEND_URL'] = 'https://smart-hire-beta.vercel.app'
     
     return app
-
-  
