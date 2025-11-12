@@ -159,8 +159,8 @@ def create_app(config=None):
     allowed_origins = app.config.get('CORS_ORIGINS', [
         "http://localhost:5173", 
         "http://127.0.0.1:5173",
-        "https://smart-recruiter-mu.vercel.app",
-        "https://smart-recruiter-mu.vercel.app/"
+        "https://smart-hire-beta.vercel.app",
+        "https://smart-hire-beta.vercel.app/"
     ])
     
     
@@ -245,7 +245,7 @@ def create_app(config=None):
     
     # Frontend URL - use environment variable for production
     if os.environ.get('FLASK_ENV') == 'production':
-        app.config['FRONTEND_URL'] = os.environ.get('FRONTEND_URL', 'https://smart-recruiter-mu.vercel.app')
+        app.config['FRONTEND_URL'] = os.environ.get('FRONTEND_URL', 'https://smart-hire-beta.vercel.app')
     else:
         app.config['FRONTEND_URL'] = os.environ.get('FRONTEND_URL', 'http://localhost:5173')
     
