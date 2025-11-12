@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
-import { Code2, CheckCircle, XCircle } from "lucide-react"
+import { CodeSquare, CheckCircle, XCircle } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import Navbar from "../components/Navbar"
@@ -136,7 +136,7 @@ export default function VerifyEmail() {
           <div className="max-w-md mx-auto">
             <div className="text-center mb-8">
               <div className="flex items-center justify-center space-x-2 mb-4">
-                <Code2 className="h-8 w-8 text-primary" />
+                <CodeSquare className="h-8 w-8 text-primary" />
                 <span className="text-2xl font-bold text-foreground">SmartHire</span>
               </div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Verifying Email</h1>
@@ -165,7 +165,7 @@ export default function VerifyEmail() {
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <Code2 className="h-8 w-8 text-primary" />
+              <CodeSquare className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-foreground">SmartHire</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">

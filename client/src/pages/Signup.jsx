@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Eye, EyeOff, Code2, User, Building } from "lucide-react"
+import { Eye, EyeOff, CodeSquare, User, Building } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
@@ -124,7 +124,7 @@ export default function Signup() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <Code2 className="h-8 w-8 text-primary" />
+              <CodeSquare className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-foreground">SmartHire</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">Create Your Account</h1>

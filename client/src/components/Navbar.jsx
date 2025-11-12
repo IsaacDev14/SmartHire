@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
 import { useState } from 'react'
 import ThemeToggle from './ThemeToggle'
-import { Code2, Menu, X } from 'lucide-react'
+import { CodeSquare, Menu, X } from 'lucide-react'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <Code2 className="h-8 w-8 text-primary" />
+            <CodeSquare className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold text-foreground">SmartHire</span>
           </Link>
 

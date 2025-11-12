@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { Code2, Mail } from "lucide-react"
+import { CodeSquare, Mail } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
@@ -74,7 +74,7 @@ export default function ForgotPassword() {
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <Code2 className="h-8 w-8 text-primary" />
+              <CodeSquare className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-foreground">SmartHire</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">Forgot Password</h1>

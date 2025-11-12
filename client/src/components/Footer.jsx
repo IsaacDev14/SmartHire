@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Code2, Github, Twitter, Linkedin, Mail } from "lucide-react"
+import { CodeSquare, Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
 
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Code2 className="h-6 w-6 text-primary" />
+              <CodeSquare className="h-6 w-6 text-primary" />
               <span className="text-lg font-bold text-card-foreground">SmartHire</span>
             </div>
             <p className="text-sm text-muted-foreground mb-4 max-w-md">

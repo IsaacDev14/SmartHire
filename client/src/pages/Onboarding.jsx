@@ -8,7 +8,7 @@ import { Label } from "../components/ui/label"
 import Navbar from "../components/Navbar"
 // import Footer from "../components/Footer"
 import Footer from "./Footer"
-import { Code2 } from "lucide-react"
+import { CodeSquare } from "lucide-react"
 import { useToast } from "../components/ui/use-toast"
 
 // Dummy
@@ -82,7 +82,7 @@ export default function Onboarding() {
         <div className="max-w-3xl w-full">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <Code2 className="h-8 w-8 text-primary" />
+              <CodeSquare className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-foreground">SmartHire</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">Tell Us About Your Interests</h1>

@@ -8,7 +8,7 @@ import {
   Users,
   BarChart3,
   LogOut,
-  Code2,
+  CodeSquare,
   ChevronLeft,
   ChevronRight,
   Plus,
@@ -101,7 +101,7 @@ export default function RecruiterSidebar() {
       <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
         {!collapsed && (
           <div className="flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-sidebar-primary" />
+            <CodeSquare className="h-6 w-6 text-sidebar-primary" />
             <div>
               <span className="font-bold text-sidebar-foreground">SmartHire</span>
               <p className="text-xs text-sidebar-foreground/70">Recruiter Portal</p>
